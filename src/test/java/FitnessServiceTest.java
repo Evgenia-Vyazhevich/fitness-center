@@ -54,4 +54,16 @@ class FitnessServiceTest {
         assertFalse(service.enrollClient(1, client3));
         assertEquals(2, service.getParticipantsCount(1));
     }
+
+
+    @Test
+    void shouldEnrollDifferentClientsAndUpdateParticipantsCount() {
+        Client client1 = new Client(1, "Женя");
+        Client client2 = new Client(2, "Юля");
+
+        assertTrue(service.enrollClient(1, client1));
+        assertTrue(service.enrollClient(1, client2));
+
+        assertEquals(2, service.getParticipantsCount(1));
+    }
 }

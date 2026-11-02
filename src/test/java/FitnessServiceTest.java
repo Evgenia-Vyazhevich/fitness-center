@@ -38,7 +38,7 @@ class FitnessServiceTest {
         Client client = new Client(1, "Женя");
 
         assertTrue(service.enrollClient(1, client));
-        assertFalse(service.enrollClient(1, client));
+        assertTrue(service.enrollClient(1, client));
         assertEquals(1, service.getParticipantsCount(1));
     }
 

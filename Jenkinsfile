@@ -1,41 +1,46 @@
+```groovy
 pipeline {
     agent any
+
+    tools {
+        maven 'Maven-3.10.0'
+    }
 
     stages {
         stage('Project Information') {
             steps {
-                echo '=== Maven project information ==='
-                bat 'mvn -q help:evaluate -Dexpression=project.groupId -DforceStdout'
-                bat 'mvn -q help:evaluate -Dexpression=project.artifactId -DforceStdout'
-                bat 'mvn -q help:evaluate -Dexpression=project.version -DforceStdout'
+                bat '"C:\\Users\\zheni\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\maven\\latest\\bin\\mvn.cmd" -version'
+                bat '"C:\\Users\\zheni\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\maven\\latest\\bin\\mvn.cmd" -q help:evaluate -Dexpression=project.artifactId -DforceStdout'
+                bat '"C:\\Users\\zheni\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\maven\\latest\\bin\\mvn.cmd" -q help:evaluate -Dexpression=project.version -DforceStdout'
             }
         }
 
         stage('Build') {
             steps {
-                bat 'mvn compile'
+                bat '"C:\\Users\\zheni\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\maven\\latest\\bin\\mvn.cmd" -B -ntp clean compile'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                bat '"C:\\Users\\zheni\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\maven\\latest\\bin\\mvn.cmd" -B -ntp test'
             }
         }
 
         stage('Package') {
             steps {
-                bat 'mvn package -DskipTests'
+                bat '"C:\\Users\\zheni\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\maven\\latest\\bin\\mvn.cmd" -B -ntp package -DskipTests'
             }
         }
     }
 
     post {
         success {
-            echo 'Pipeline завершён успешно: проект собран, тесты выполнены, JAR создан.'
+            echo 'Pipeline завершился успешно!'
         }
         failure {
             echo 'Pipeline завершился с ошибкой'
         }
     }
 }
+```

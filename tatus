@@ -1,0 +1,7 @@
+[33mf93b859[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Add fitness enrollment test
+[33m036eeb2[m Fix test
+[33m45cd5b7[m Test failure
+[33m6f60c42[m Fix Jenkinsfile syntax
+[33mdd6c7d2[m Fix Maven executable path in Jenkins
+[33md43a720[m Fix Jenkins Maven configuration
+[33m0de406e[m Initial project version

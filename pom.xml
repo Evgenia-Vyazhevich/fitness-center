@@ -1,5 +1,5 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -21,7 +21,6 @@
     </properties>
 
     <dependencies>
-        <!-- JUnit для тестирования -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -29,14 +28,12 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- SLF4J для журналирования -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
 
-        <!-- Logback для вывода логов -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -53,7 +50,7 @@
         </resources>
 
         <plugins>
-            <!-- Компиляция Java -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -63,14 +60,12 @@
                 </configuration>
             </plugin>
 
-            <!-- Запуск тестов -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
             </plugin>
 
-            <!-- Создание JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -84,22 +79,24 @@
                 </configuration>
             </plugin>
 
-            <!-- Статический анализ Checkstyle -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.6.0</version>
+
                 <configuration>
                     <configLocation>${project.basedir}/checkstyle.xml</configLocation>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                 </configuration>
+
                 <dependencies>
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
                         <version>${checkstyle.version}</version>
+
                         <exclusions>
                             <exclusion>
                                 <groupId>commons-beanutils</groupId>
@@ -112,17 +109,21 @@
                         </exclusions>
                     </dependency>
                 </dependencies>
+
             </plugin>
+
         </plugins>
     </build>
 
-    <!-- Профили приложения -->
     <profiles>
+
         <profile>
             <id>standard</id>
+
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+
             <properties>
                 <training.maxParticipants>2</training.maxParticipants>
                 <app.profile.name>standard</app.profile.name>
@@ -131,11 +132,13 @@
 
         <profile>
             <id>expanded</id>
+
             <properties>
                 <training.maxParticipants>4</training.maxParticipants>
                 <app.profile.name>expanded</app.profile.name>
             </properties>
         </profile>
+
     </profiles>
 
 </project>

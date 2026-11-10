@@ -1,7 +1,9 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>by.ipprpo</groupId>
@@ -11,6 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
+
         <junit.version>5.10.2</junit.version>
         <slf4j.version>2.0.17</slf4j.version>
         <logback.version>1.5.18</logback.version>
@@ -18,7 +21,7 @@
     </properties>
 
     <dependencies>
-        <!-- JUnit -->
+        <!-- JUnit для тестирования -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -26,13 +29,14 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Logging -->
+        <!-- SLF4J для журналирования -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
 
+        <!-- Logback для вывода логов -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -49,7 +53,7 @@
         </resources>
 
         <plugins>
-            <!-- Java Compiler -->
+            <!-- Компиляция Java -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -59,14 +63,14 @@
                 </configuration>
             </plugin>
 
-            <!-- JUnit Tests -->
+            <!-- Запуск тестов -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
             </plugin>
 
-            <!-- JAR -->
+            <!-- Создание JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -80,7 +84,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Checkstyle: Static Code Analysis -->
+            <!-- Статический анализ Checkstyle -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -96,13 +100,23 @@
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
                         <version>${checkstyle.version}</version>
+                        <exclusions>
+                            <exclusion>
+                                <groupId>commons-beanutils</groupId>
+                                <artifactId>commons-beanutils</artifactId>
+                            </exclusion>
+                            <exclusion>
+                                <groupId>commons-logging</groupId>
+                                <artifactId>commons-logging</artifactId>
+                            </exclusion>
+                        </exclusions>
                     </dependency>
                 </dependencies>
             </plugin>
         </plugins>
     </build>
 
-    <!-- Maven Profiles from Laboratory Work №4 -->
+    <!-- Профили приложения -->
     <profiles>
         <profile>
             <id>standard</id>
@@ -123,4 +137,5 @@
             </properties>
         </profile>
     </profiles>
+
 </project>

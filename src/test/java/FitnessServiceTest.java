@@ -38,7 +38,7 @@ class FitnessServiceTest {
         Client client = new Client(1, "Женя");
 
         assertTrue(service.enrollClient(1, client));
-        assertTrue(service.enrollClient(1, client));
+        assertFalse(service.enrollClient(1, client));
         assertEquals(1, service.getParticipantsCount(1));
     }
 
@@ -56,12 +56,14 @@ class FitnessServiceTest {
     }
 
 
-        @Test
-    void shouldNotEnrollSameClientTwice() {
-        Client client = new Client(1, "Женя");
+    @Test
+    void shouldEnrollDifferentClientsAndUpdateParticipantsCount() {
+        Client client1 = new Client(1, "Женя");
+        Client client2 = new Client(2, "Юля");
 
-        assertTrue(service.enrollClient(1, client));
-        assertFalse(service.enrollClient(1, client));
-        assertEquals(1, service.getParticipantsCount(1));
+        assertTrue(service.enrollClient(1, client1));
+        assertTrue(service.enrollClient(1, client2));
+
+        assertEquals(2, service.getParticipantsCount(1));
     }
 }

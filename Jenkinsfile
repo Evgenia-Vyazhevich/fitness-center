@@ -1,50 +1,40 @@
 pipeline {
     agent any
-
     tools {
         maven 'Maven-3.10.0'
     }
-
+    options {
+        skipDefaultCheckout(true)
+        timestamps()
+    }
     stages {
-        stage('Project Information') {
+        stage('Checkout') {
             steps {
-                bat '"C:\\Users\\zheni\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\maven\\latest\\bin\\mvn.cmd" -version'
-                bat '"C:\\Users\\zheni\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\maven\\latest\\bin\\mvn.cmd" -q help:evaluate -Dexpression=project.artifactId -DforceStdout'
-                bat '"C:\\Users\\zheni\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\maven\\latest\\bin\\mvn.cmd" -q help:evaluate -Dexpression=project.version -DforceStdout'
+                checkout scm
+                bat 'git rev-parse HEAD'
             }
         }
-
         stage('Build') {
-            steps {
-                bat '"C:\\Users\\zheni\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\maven\\latest\\bin\\mvn.cmd" -B -ntp clean compile'
-            }
+            steps { bat 'mvn -B -ntp clean compile' }
         }
-
         stage('Static Analysis') {
-            steps {
-                bat '"C:\\Users\\zheni\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\maven\\latest\\bin\\mvn.cmd" checkstyle:check'
-            }
+            steps { bat 'mvn -B -ntp checkstyle:check' }
         }
-
         stage('Test') {
-            steps {
-                bat '"C:\\Users\\zheni\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\maven\\latest\\bin\\mvn.cmd" -B -ntp test'
-            }
+            steps { bat 'mvn -B -ntp test' }
         }
-
         stage('Package') {
-            steps {
-                bat '"C:\\Users\\zheni\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\maven\\latest\\bin\\mvn.cmd" -B -ntp package -DskipTests'
-            }
+            steps { bat 'mvn -B -ntp package -DskipTests' }
         }
     }
-
     post {
-        success {
-            echo 'Pipeline завершился успешно!'
+        always {
+            junit testResults: 'target/surefire-reports/*.xml', allowEmptyResults: true
+            archiveArtifacts artifacts: 'target/checkstyle-result.xml,logs/*.log',
+                    allowEmptyArchive: true
         }
-        failure {
-            echo 'Pipeline завершился с ошибкой'
+        success {
+            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
 }

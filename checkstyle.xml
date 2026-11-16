@@ -5,10 +5,14 @@
 
 <module name="Checker">
 
-    <!-- Запрет символов табуляции -->
-    <module name="FileTabCharacter"/>
+    <module name="LineLength">
+        <property name="max" value="100"/>
+    </module>
 
-    <!-- Проверка переноса строки в конце файла -->
-    <module name="NewlineAtEndOfFile"/>
+    <module name="TreeWalker">
+        <module name="TypeName"/>
+        <module name="MethodName"/>
+        <module name="LocalVariableName"/>
+    </module>
 
 </module>

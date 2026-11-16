@@ -1,0 +1,27 @@
+[INFO] Scanning for projects...
+[INFO] Loaded 24514 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[INFO] Loaded 64 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+[INFO] 
+[INFO] ----------------------< by.ipprpo:fitness-center >----------------------
+[INFO] Building fitness-center 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (default-cli) @ fitness-center ---
+[WARNING] Could not transfer metadata /.meta/prefixes.txt from/to jvnet-nexus-releases (https://maven.java.net/content/repositories/releases/): (certificate_unknown) PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+[INFO] �������� ��������...
+[ERROR] C:\Users\zheni\Documents\ChatGPT\labs\work\fitness-lab5\src\main\java\service\FitnessService.java:50: ����� ������ ������ 100 (����� 113). [LineLength]
+�������� ���������.
+[INFO] ------------------------------------------------------------------------
+[ERROR] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.695 s
+[INFO] Finished at: 2026-11-17T01:24:58+03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-checkstyle-plugin:3.6.0:check (default-cli) on project fitness-center: Failed during checkstyle execution: There is 1 error reported by Checkstyle 10.21.4 with C:\Users\zheni\Documents\ChatGPT\labs\work\fitness-lab5/checkstyle.xml ruleset. -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

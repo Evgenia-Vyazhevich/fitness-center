@@ -27,14 +27,4 @@ pipeline {
             steps { bat 'mvn -B -ntp package -DskipTests' }
         }
     }
-    post {
-        always {
-            junit testResults: 'target/surefire-reports/*.xml', allowEmptyResults: true
-            archiveArtifacts artifacts: 'target/checkstyle-result.xml,logs/*.log',
-                    allowEmptyArchive: true
-        }
-        success {
-            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-        }
-    }
 }

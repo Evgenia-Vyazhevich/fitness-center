@@ -55,6 +55,17 @@ class FitnessServiceTest {
         assertEquals(2, service.getParticipantsCount(1));
     }
 
+    @Test
+    void shouldThrowExceptionWhenTrainingNotFound() {
+
+        Client client = new Client(1, "Женя");
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> service.enrollClient(999, client)
+        );
+    }
+
 
     @Test
     void shouldEnrollDifferentClientsAndUpdateParticipantsCount() {
